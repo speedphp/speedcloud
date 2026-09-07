@@ -1,0 +1,31 @@
+{
+  "name": "speed",
+  "version": "1.3.0",
+  "description": "A microservices orchestration framework for TypeScript (the Spring Cloud equivalent, built on typespeed).",
+  "author": "speedphp",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./registry": { "types": "./dist/registry/index.d.ts", "default": "./dist/registry/index.js" },
+    "./gateway": { "types": "./dist/gateway/index.d.ts", "default": "./dist/gateway/index.js" },
+    "./config": { "types": "./dist/config/index.d.ts", "default": "./dist/config/index.js" },
+    "./loadbalancer": { "types": "./dist/loadbalancer/index.d.ts", "default": "./dist/loadbalancer/index.js" },
+    "./circuit-breaker": { "types": "./dist/circuit-breaker/index.d.ts", "default": "./dist/circuit-breaker/index.js" },
+    "./rpc": { "types": "./dist/rpc/index.d.ts", "default": "./dist/rpc/index.js" },
+    "./messaging": { "types": "./dist/messaging/index.d.ts", "default": "./dist/messaging/index.js" },
+    "./observability": { "types": "./dist/observability/index.d.ts", "default": "./dist/observability/index.js" }
+  },
+  "dependencies": {
+    "typespeed": "^2.6.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^22.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "rm -rf dist"
+  }
+}
