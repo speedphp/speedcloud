@@ -16,6 +16,23 @@ npm run start        # 访问 http://127.0.0.1:8080/health
 
 `speed new` 生成的项目使用 **标准装饰器**（TC39，`experimentalDecorators: false`），入口骨架见 `src/main.ts`。
 
+## 注册中心（1.3.1）
+
+注册表是注册中心的「单点真相」，提供 `register` / `unregister` / `getInstances` 三个基础 API（纯内存，同 `host:port` 重复注册只更新不新增）：
+
+```ts
+import { LocalRegistry } from "speed/registry";
+
+const registry = new LocalRegistry();
+registry.register("user-service", { host: "127.0.0.1", port: 8080 });
+registry.register("user-service", { host: "127.0.0.1", port: 8081, metadata: { version: "v2" } });
+
+registry.getInstances("user-service");           // 两个实例
+registry.unregister("user-service", "127.0.0.1", 8080); // true
+```
+
+> 详见 `docs/1.3.1-本地注册表.md`（为什么 → 怎么用 → 原理 → 怎么扩展）。
+
 ## 模块（单包 `speed` + 子路径导出）
 
 | 子路径 | 模块 | 版本 |

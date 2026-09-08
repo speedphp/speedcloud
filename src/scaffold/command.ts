@@ -8,7 +8,7 @@ const program = new Command();
 program
     .name("speed")
     .description("A microservices orchestration framework for TypeScript (the Spring Cloud equivalent, built on typespeed).")
-    .version("1.3.0");
+    .version("1.3.1");
 
 program.command('new <projectName>')
     .description('Create a new speed project.')

@@ -1,2 +1,3 @@
 // ① 注册中心（服务注册 + 发现）—— 1.3.x 实现
-export {};
+export { LocalRegistry } from "./registry";
+export type { ServiceInstance } from "./registry";
