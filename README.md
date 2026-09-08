@@ -4,6 +4,18 @@
 
 > 关系：`typespeed`（单体框架 = SpringBoot）造应用，`speed`（微服务编排 = SpringCloud）管应用群。
 
+## 快速开始（1.3.0）
+
+```bash
+npm install speed -g
+speed new demo
+cd demo
+npm install
+npm run start        # 访问 http://127.0.0.1:8080/health
+```
+
+`speed new` 生成的项目使用 **标准装饰器**（TC39，`experimentalDecorators: false`），入口骨架见 `src/main.ts`。
+
 ## 模块（单包 `speed` + 子路径导出）
 
 | 子路径 | 模块 | 版本 |

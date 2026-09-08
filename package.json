@@ -17,8 +17,15 @@
     "./messaging": { "types": "./dist/messaging/index.d.ts", "default": "./dist/messaging/index.js" },
     "./observability": { "types": "./dist/observability/index.d.ts", "default": "./dist/observability/index.js" }
   },
+  "bin": {
+    "speed": "dist/scaffold/command.js"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "typespeed": "^2.6.6"
+    "typespeed": "^2.6.7",
+    "commander": "^9.5.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
@@ -26,6 +33,8 @@
   },
   "scripts": {
     "build": "tsc -p .",
+    "prebuild": "rm -rf dist",
+    "postbuild": "cp -r src/scaffold/templates dist/scaffold/templates",
     "clean": "rm -rf dist"
   }
 }
