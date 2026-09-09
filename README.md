@@ -33,6 +33,22 @@ registry.unregister("user-service", "127.0.0.1", 8080); // true
 
 > 详见 `docs/1.3.1-本地注册表.md`（为什么 → 怎么用 → 原理 → 怎么扩展）。
 
+## 服务声明（1.3.2）
+
+`@Service` 装饰器把类标记为「可被发现的微服务」——**只声明身份，不注册实例**（真实 host/port 要等启动后拿到再提交）：
+
+```ts
+import { Service, serviceRegistrar } from "speed";
+
+@Service("user-service")
+class UserService {}
+
+serviceRegistrar.register("user-service", { host: "127.0.0.1", port: 8080 });
+serviceRegistrar.getRegistry().getInstances("user-service");
+```
+
+> `@Service` 只声明，真实 host/port 在启动后用 `serviceRegistrar.register()` 提交；详见 `docs/1.3.2-Service装饰器.md`。
+
 ## 模块（单包 `speed` + 子路径导出）
 
 | 子路径 | 模块 | 版本 |

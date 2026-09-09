@@ -8,7 +8,7 @@
         "test": "ts-node --transpile-only src/main.ts"
     },
     "dependencies": {
-        "speed": "^1.3.0",
+        "speed": "^1.3.2",
         "typespeed": "^2.6.7"
     },
     "devDependencies": {

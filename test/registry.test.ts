@@ -4,14 +4,14 @@ import { LocalRegistry } from "../src/registry";
 describe("LocalRegistry", () => {
     it("register 后 getInstances 能取到该实例，且 registeredAt 被自动填充为数字", () => {
         const registry = new LocalRegistry();
-        const instance = registry.register("user-service", { host: "127.0.0.1", port: 8080 });
+        const registration = registry.register("user-service", { host: "127.0.0.1", port: 8080 });
 
         const instances = registry.getInstances("user-service");
         expect(instances).to.have.lengthOf(1);
         expect(instances[0].host).to.equal("127.0.0.1");
         expect(instances[0].port).to.equal(8080);
         expect(instances[0].registeredAt).to.be.a("number");
-        expect(instance.registeredAt).to.be.a("number");
+        expect(registration.instanceId).to.equal("127.0.0.1:8080");
     });
 
     it("getInstances 查询不存在的服务返回空数组", () => {
