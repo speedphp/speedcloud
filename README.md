@@ -1,6 +1,6 @@
 # speed
 
-一个 TypeScript **微服务编排框架**（对标 Spring Cloud），构建于 [typespeed](https://github.com/speedphp/typespeed) 之上。
+一个 TypeScript **微服务编排框架**（对应 Spring Cloud），构建于 [typespeed](https://github.com/speedphp/typespeed) 之上。
 
 > 关系：`typespeed`（单体框架 = SpringBoot）造应用，`speed`（微服务编排 = SpringCloud）管应用群。
 
@@ -18,7 +18,7 @@ npm run start        # 访问 http://127.0.0.1:8080/health
 
 ## 注册中心（1.3.1）
 
-注册表是注册中心的「单点真相」，提供 `register` / `unregister` / `getInstances` 三个基础 API（纯内存，同 `host:port` 重复注册只更新不新增）：
+注册表是注册中心服务信息的唯一数据来源，提供 `register` / `unregister` / `getInstances` 三个基础 API（纯内存，同 `host:port` 重复注册只更新不新增）：
 
 ```ts
 import { LocalRegistry } from "speed/registry";

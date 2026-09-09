@@ -29,7 +29,7 @@ export interface Registry {
     getInstances(serviceName: string): ServiceInstance[];
 }
 
-// 本地注册表：服务注册 + 发现的单点真相（纯内存，不涉及网络）。
+// 本地注册表：服务注册 + 发现的唯一数据来源（纯内存，不涉及网络）。
 // 数据结构为两级：服务名 -> 实例列表（实例列表用数组，实例带 metadata 扩展位）。
 export class LocalRegistry implements Registry {
     private instances = new Map<string, ServiceInstance[]>();
