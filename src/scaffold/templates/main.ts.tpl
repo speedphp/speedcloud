@@ -27,8 +27,9 @@ class Main {
     public main() {
         const port = 8080;
         this.server.start(port);
-        // 声明/提交分离：@Service 只做声明，这里用真实 host:port 提交注册
-        serviceRegistrar.register("###appName###", { host: "127.0.0.1", port });
-        console.log(`speed service "###appName###" started at http://127.0.0.1:${port}`);
+        // 声明/提交分离：@Service 只做声明，这里用真实 host:port 提交注册。
+        // getPort() 返回真实监听端口（typespeed 2.6.8 起；动态端口场景也返回实际分配值）。
+        serviceRegistrar.register("###appName###", { host: "127.0.0.1", port: this.server.getPort() });
+        console.log(`speed service "###appName###" started at http://127.0.0.1:${this.server.getPort()}`);
     }
 }

@@ -49,6 +49,24 @@ serviceRegistrar.getRegistry().getInstances("user-service");
 
 > `@Service` 只声明，真实 host/port 在启动后用 `serviceRegistrar.register()` 提交；详见 `docs/1.3.2-Service装饰器.md`。
 
+## 心跳机制（1.3.3）
+
+注册后启动**定时心跳**，让注册中心持续刷新 `lastHeartbeat`——注册表从此知道服务「还活着」（僵尸实例的摘除判定由 1.3.4 超时扫描负责）：
+
+```ts
+const registration = serviceRegistrar.register("user-service", {
+    host: "127.0.0.1",
+    port: this.server.getPort(),   // 真实监听端口（typespeed 2.6.8）
+});
+
+registration.startHeartbeat();          // 默认每 10 秒续期一次
+// registration.startHeartbeat(5000);   // 自定义间隔
+// registration.stopHeartbeat();        // 停机时停止（deregister 注销成功也会自动停）
+```
+
+> 心跳间隔（默认 10s）与超时阈值（1.3.4）是两个独立配置项；详见 `docs/1.3.3-心跳机制.md`。
+> 配套 typespeed 2.6.8：`ServerFactory.getPort()/getHost()` 返回真实监听地址。
+
 ## 模块（单包 `speed` + 子路径导出）
 
 | 子路径 | 模块 | 版本 |

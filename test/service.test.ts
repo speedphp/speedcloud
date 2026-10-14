@@ -55,13 +55,14 @@ describe("ServiceRegistrar（声明/提交两阶段）", () => {
         expect(registrar.getRegistry().getInstances("user-service")).to.have.lengthOf(1);
     });
 
-    it("Registration.renew 刷新 registeredAt，deregister 移除实例", () => {
+    it("Registration.renew 刷新 lastHeartbeat（不刷 registeredAt），deregister 移除实例", () => {
         registrar.declare("UserService", { name: "user-service" });
-        const reg = registrar.register("user-service", { host: "127.0.0.1", port: 8080, registeredAt: 1 });
+        const reg = registrar.register("user-service", { host: "127.0.0.1", port: 8080, registeredAt: 1, lastHeartbeat: 1 });
         expect(reg.instanceId).to.equal("127.0.0.1:8080");
         reg.renew();
         const instances = registrar.getRegistry().getInstances("user-service");
-        expect(instances[0].registeredAt).to.be.greaterThan(1);
+        expect(instances[0].lastHeartbeat).to.be.greaterThan(1);
+        expect(instances[0].registeredAt).to.equal(1);
         expect(reg.deregister()).to.equal(true);
         expect(registrar.getRegistry().getInstances("user-service")).to.deep.equal([]);
     });
